@@ -1,44 +1,45 @@
 import jetbrains.buildServer.configs.kotlin.*
-import jetbrains.buildServer.configs.kotlin.buildFeatures.perfmon
-
-/*
-The settings script is an entry point for defining a TeamCity
-project hierarchy. The script should contain a single call to the
-project() function with a Project instance or an init function as
-an argument.
-
-VcsRoots, BuildTypes, Templates, and subprojects can be
-registered inside the project using the vcsRoot(), buildType(),
-template(), and subProject() methods respectively.
-
-To debug settings scripts in command-line, run the
-
-    mvnDebug org.jetbrains.teamcity:teamcity-configs-maven-plugin:generate
-
-command and attach your debugger to the port 8000.
-
-To debug in IntelliJ Idea, open the 'Maven Projects' tool window (View
--> Tool Windows -> Maven Projects), find the generate task node
-(Plugins -> teamcity-configs -> teamcity-configs:generate), the
-'Debug' option is available in the context menu for the task.
-*/
 
 version = "2025.11"
 
 project {
 
-    buildType(Build)
-}
+    buildType(Source)
 
-object Build : BuildType({
-    name = "Build"
+    val numProjects=1
+    val numConfigurationsPerProject=900
 
-    vcs {
-        root(DslContext.settingsRoot)
+
+    for (i in 0..numProjects) {
+        subProject {
+            id("subProj_$i")
+            name = "subProj $i"
+
+            for (j in 0..numConfigurationsPerProject) {
+                buildType {
+                    id("subProj_bt_$i" + "_$j")
+                    name = "bt $i $j"
     }
 
-    features {
-        perfmon {
+                }
+            }
         }
     }
+
+
+object Source : BuildType({
+    name = "source"
+
+            for (j in 0..numConfigurationsPerProject) {
+                dependencies {
+                    snapshot(AbsoluteId("subProj_bt_$i" + "_$j")) {
+                    reuseBuilds = ReuseBuilds.NO
+                }
+
+                }
+}
+
+
 })
+
+
