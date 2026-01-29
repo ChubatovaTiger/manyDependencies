@@ -1,10 +1,11 @@
 import jetbrains.buildServer.configs.kotlin.*
 
 version = "2025.11"
-val numProjects=1
-val numConfigurationsPerProject=900
+
 project {
     buildType(Source)
+    val numProjects=1
+    val numConfigurationsPerProject=900
     for (i in 0..numProjects) {
         subProject {
             id("subProj_$i")
@@ -21,16 +22,20 @@ project {
 }
 
 object Source : BuildType({
+    val numProjects = 1
+    val numConfigurationsPerProject = 900
+
     name = "source"
-            for (i in 0..numProjects) {
-                for (j in 0..numConfigurationsPerProject) {
-                    dependencies {
-                        snapshot(AbsoluteId("subProj_bt_$i" + "_$j")) {
-                        reuseBuilds = ReuseBuilds.NO
-                        }
-                    }
+
+    for (i in 0..numProjects) {
+        for (j in 0..numConfigurationsPerProject) {
+            dependencies {
+                snapshot(AbsoluteId("subProj_bt_${i}_$j")) {
+                    reuseBuilds = ReuseBuilds.NO
                 }
             }
+        }
+    }
 })
 
 
