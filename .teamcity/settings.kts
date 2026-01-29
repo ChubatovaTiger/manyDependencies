@@ -1,6 +1,7 @@
 import jetbrains.buildServer.configs.kotlin.*
 
 version = "2025.11"
+val numProjects=900
 val numConfigurationsPerProject=900
 project {
     buildType(Source)
