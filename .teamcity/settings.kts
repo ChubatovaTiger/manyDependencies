@@ -23,7 +23,7 @@ project {
 
 object Source : BuildType({
     name = "source"
-
+            for (i in 0..numProjects) {
             for (j in 0..numConfigurationsPerProject) {
                 dependencies {
                     snapshot(AbsoluteId("subProj_bt_$i" + "_$j")) {
@@ -31,6 +31,7 @@ object Source : BuildType({
                     }
                 }
             }
+}
 })
 
 
