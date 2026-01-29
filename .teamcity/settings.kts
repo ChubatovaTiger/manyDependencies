@@ -5,7 +5,7 @@ version = "2025.11"
 project {
     buildType(Source)
     val numProjects=1
-    val numConfigurationsPerProject=900
+    val numConfigurationsPerProject=200
     for (i in 0..numProjects) {
         subProject {
             id("subProj_$i")
