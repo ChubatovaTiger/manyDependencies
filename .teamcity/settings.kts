@@ -30,7 +30,7 @@ object Source : BuildType({
     for (i in 1..numProjects) {
         for (j in 1..numConfigurationsPerProject) {
             dependencies {
-                snapshot("subProj_bt_${i}_$j") {
+                snapshot(Id("subProj_bt_${i}_$j")) {
                     reuseBuilds = ReuseBuilds.NO
                 }
             }
