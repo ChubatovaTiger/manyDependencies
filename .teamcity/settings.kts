@@ -33,8 +33,7 @@ object Source : BuildType({
                 snapshot(id("subProj_bt_${i}_$j")) {
                     reuseBuilds = ReuseBuilds.NO
                 }
-                    reuseBuilds = ReuseBuilds.NO
-                }
+
             }
         }
     }
