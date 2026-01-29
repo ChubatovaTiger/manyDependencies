@@ -1,10 +1,10 @@
 import jetbrains.buildServer.configs.kotlin.*
 
 version = "2025.11"
-
+val numConfigurationsPerProject=900
 project {
     buildType(Source)
-    val numConfigurationsPerProject=900
+    //val numConfigurationsPerProject=900
     for (i in 0..numProjects) {
         subProject {
             id("subProj_$i")
