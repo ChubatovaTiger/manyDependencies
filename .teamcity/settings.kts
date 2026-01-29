@@ -23,7 +23,7 @@ project {
 
 object Source : BuildType({
     val numProjects = 1
-    val numConfigurationsPerProject = 900
+    val numConfigurationsPerProject = 200
 
     name = "source"
 
